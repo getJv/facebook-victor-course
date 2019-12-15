@@ -1,0 +1,28 @@
+version: '3'
+services:
+  backend:
+    container_name: backend
+    image: getjv/php7.2
+    restart: always
+    ports:
+      - "8888:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - HTTPD_SERVER_NAME=local
+      - HTTPD_DOCUMENT_ROOT_CONTEXT=public
+    links:
+      - mysql
+  mysql:
+    container_name: mysql
+    image: getjv/mysql
+    restart: always
+    ports:
+      - "3307:3306"
+    environment: 
+      - MYSQL_ROOT_PASSWORD=mysql
+
+      
+
+     
+     
