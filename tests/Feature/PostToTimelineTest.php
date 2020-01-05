@@ -2,11 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-use App\User;
 use App\Post;
+use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PostToTimelineTest extends TestCase
 {
@@ -18,22 +17,38 @@ class PostToTimelineTest extends TestCase
         $this->withoutExceptionHandling();
 
         //Criamos um usuario on the fly
-        $this->actingAs($user = factory(User::class)->create(),'api');
+        $this->actingAs($user = factory(User::class)->create(), 'api');
 
-        $response = $this->post('/api/posts',[
+        $response = $this->post('/api/posts', [
             'data' => [
                 'type' => 'posts',
                 'attributes' => [
                     'body' => 'Testing body',
 
-                ]
-            ]
+                ],
+            ],
         ]);
 
         $post = Post::first();
 
+        $this->assertCount(1,Post::all());
+        $this->assertEquals($user->id,$post->user_id);
+        $this->assertEquals('Testing body',$post->body);
+
         $response->assertStatus(201);
+        $response->assertJson([
+            'data' => [
+                'type' => 'posts',
+                'post_id' => $post->id,
+                'attributes' => [
+                    'body' => 'Testing body',
+                ],
+            ],
+            'links' => [
+                'self' => url('/posts/' . $post->id),
+            ],
+        ]);
 
     }
-    
+
 }
