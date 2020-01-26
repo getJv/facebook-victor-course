@@ -11,19 +11,15 @@
         </div>
         <div class="ml-6">
           <div class="text-sm text-bold">{{post.data.attributes.posted_by.data.attributes.name}}</div>
-          <div class="text-sm text-gray-600">12 minutes ago</div>
+          <div class="text-sm text-gray-600">{{post.data.attributes.posted_at}}</div>
         </div>
       </div>
       <div class="mt-4">
         <p>{{post.data.attributes.body}}</p>
       </div>
     </div>
-    <div class="w-full" v-if="false">
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTqHtK0etjK1-wYcfsldJcj20yi3PEXwNsS5XclqKsz7ESdFsUl"
-        alt="Post image"
-        class="w-full"
-      />
+    <div class="w-full" v-if="post.data.attributes.image">
+      <img :src="post.data.attributes.image" alt="Post image" class="w-full" />
     </div>
     <div class="px-4 pt-4 flex justify-between text-gray-700 text-sm">
       <div class="flex">

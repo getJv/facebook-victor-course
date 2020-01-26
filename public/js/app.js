@@ -2053,10 +2053,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "post",
   props: ["post"]
@@ -20095,7 +20091,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "text-sm text-gray-600" }, [
-              _vm._v("12 minutes ago")
+              _vm._v(_vm._s(_vm.post.data.attributes.posted_at))
             ])
           ])
         ]),
@@ -20105,8 +20101,13 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      false
-        ? undefined
+      _vm.post.data.attributes.image
+        ? _c("div", { staticClass: "w-full" }, [
+            _c("img", {
+              staticClass: "w-full",
+              attrs: { src: _vm.post.data.attributes.image, alt: "Post image" }
+            })
+          ])
         : _vm._e(),
       _vm._v(" "),
       _c(
