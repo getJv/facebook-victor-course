@@ -1,7 +1,8 @@
 <template>
   <div class="flex flex-col items-center py-4">
     <NewPost />
-    <Post v-for="post in posts.data" :key="post.data. post_id" :post="post" />
+    <p v-if="loading">Loading posts...</p>
+    <Post v-else v-for="post in posts.data" :key="post.data. post_id" :post="post" />
   </div>
 </template>
 <script>
@@ -16,7 +17,8 @@ export default {
 
   data() {
     return {
-      posts: []
+      posts: null,
+      loading: true
     };
   },
   mounted() {
@@ -24,9 +26,11 @@ export default {
       .get("/api/posts")
       .then(res => {
         this.posts = res.data;
+        this.loading = !this.loading;
       })
       .catch(err => {
         console.log("Unable to facth posts");
+        this.loading = !this.loading;
       });
   }
 };
