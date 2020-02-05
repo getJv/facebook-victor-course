@@ -38,7 +38,10 @@
           />
         </svg>
       </router-link>
-      <router-link to="/" class="px-6 border-b-2 border-white h-full flex items-center">
+      <router-link
+        :to="'/users/' + user.data.user_id"
+        class="px-6 border-b-2 border-white h-full flex items-center"
+      >
         <img
           src="https://cdn.pixabay.com/photo/2014/07/09/10/04/man-388104_960_720.jpg"
           alt="profile image for user"
@@ -65,7 +68,24 @@
 
 <script>
 export default {
-  name: "Nav"
+  name: "Nav",
+  mounted() {
+    axios
+      .get("/api/auth-user")
+      .then(res => {
+        this.user = res.data;
+      })
+      .catch(err => console.log(err))
+      .finally(() => {
+        this.loading = false;
+      });
+  },
+  data() {
+    return {
+      user: null,
+      loading: true
+    };
+  }
 };
 </script>
 
