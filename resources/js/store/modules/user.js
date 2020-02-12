@@ -13,6 +13,7 @@ const actions = {
             .get("/api/auth-user")
             .then(res => {
                 commit("setAuthUser", res.data);
+                console.log(res.data);
             })
             .catch(err => console.log(err))
             .finally(() => {
