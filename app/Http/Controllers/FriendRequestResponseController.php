@@ -13,8 +13,8 @@ class FriendRequestResponseController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'user_id' => '',
-            'status' => '',
+            'user_id' => 'required',
+            'status' => 'required',
         ]);
         try {
             $friendRequest = Friend::where('user_id', $data['user_id'])

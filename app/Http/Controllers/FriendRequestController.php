@@ -3,19 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\UserNotFoundException;
+use App\Exceptions\ValidationErrorException;
 use Illuminate\Http\Request;
 use App\Friend;
 use App\Http\Resources\Friend as FriendResource;
 use App\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\ValidationException;
 
 class FriendRequestController extends Controller
 {
     public function store()
     {
+
+
         $data = request()->validate([
-            'friend_id' => ''
+            'friend_id' => 'required'
         ]);
+
+
         try {
             User::findOrFail($data['friend_id'])->friends()->attach(auth()->user());
         } catch (ModelNotFoundException $e) {
