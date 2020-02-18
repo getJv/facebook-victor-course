@@ -14,10 +14,10 @@ class UserCanViewProfileTest extends TestCase
     /** @test */
     public function a_user_can_view_user_profiles()
     {
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
 
         $this->actingAs($user = factory(User::class)->create(), 'api');
-        $posts = factory(Post::class)->create();
+        factory(Post::class)->create();
 
         $response = $this->get('/api/users/' . $user->id);
 
