@@ -1,7 +1,7 @@
 const state = {
     user: null,
     userStatus: null,
-    friendButtonText: "Add Friend"
+    friendButtonText: null
 };
 const getters = {
     user: state => {
@@ -44,7 +44,7 @@ const actions = {
     setFriendButton({ commit, getters }) {
         if (getters.friendship === null) {
             commit("setButtonText", "Add Friend");
-        } else {
+        } else if (getters.friendship.data.attributes.confirmed_at === null) {
             commit("setButtonText", "Pending Friend Request");
         }
     }

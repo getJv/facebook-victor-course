@@ -2203,6 +2203,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -20473,21 +20474,23 @@ var render = function() {
               "absolute flex items-center bottom-0 right-0 mb-4 mr-12 z-20"
           },
           [
-            _c(
-              "button",
-              {
-                staticClass: "py3 px-3 bg-gray-400 rounded",
-                on: {
-                  click: function($event) {
-                    return _vm.$store.dispatch(
-                      "sendFriendRequest",
-                      _vm.$route.params.userId
-                    )
-                  }
-                }
-              },
-              [_vm._v(_vm._s(_vm.friendButtonText))]
-            )
+            _vm.friendButtonText
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "py3 px-3 bg-gray-400 rounded",
+                    on: {
+                      click: function($event) {
+                        return _vm.$store.dispatch(
+                          "sendFriendRequest",
+                          _vm.$route.params.userId
+                        )
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.friendButtonText))]
+                )
+              : _vm._e()
           ]
         )
       ]),
@@ -37158,7 +37161,7 @@ __webpack_require__.r(__webpack_exports__);
 var state = {
   user: null,
   userStatus: null,
-  friendButtonText: "Add Friend"
+  friendButtonText: null
 };
 var getters = {
   user: function user(state) {
@@ -37204,7 +37207,7 @@ var actions = {
 
     if (getters.friendship === null) {
       commit("setButtonText", "Add Friend");
-    } else {
+    } else if (getters.friendship.data.attributes.confirmed_at === null) {
       commit("setButtonText", "Pending Friend Request");
     }
   }
