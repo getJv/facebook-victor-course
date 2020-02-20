@@ -43,7 +43,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters({ user: "user", friendButtonText: "getFriendButtonText" })
+    ...mapGetters({ user: "user", friendButtonText: "friendButtonText" })
   },
   data: () => {
     return {
