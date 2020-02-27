@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col items-center" v-if="status.user === 'success' && user">
     <div class="relative mb-8">
       <div class="w-100 h-64 overflow-hidden z-10">
         <img
@@ -18,7 +18,6 @@
         </div>
         <p class="text-2xl text-gray-100 ml-4">{{user.data.attributes.name }}</p>
       </div>
-
       <div class="absolute flex items-center bottom-0 right-0 mb-4 mr-12 z-20">
         <button
           v-if="friendButtonText && friendButtonText !='Accept'"
@@ -38,9 +37,9 @@
       </div>
     </div>
 
-    <p v-if="postLoading">Loading posts...</p>
-    <Post v-else v-for="post in posts.data" :key="post.data. post_id" :post="post" />
-    <p v-if="!postLoading && posts.data.length < 1 ">No posts found. Get Started....</p>
+    <div v-if="status.posts === 'loading'">Loading posts...</div>
+    <div v-else-if="posts.length < 1 ">No posts found. Get Started....</div>
+    <Post v-else v-for="post in posts.data" :key="post.data.post_id" :post="post" />
   </div>
 </template>
 <script>
@@ -53,29 +52,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters({ user: "user", friendButtonText: "friendButtonText" })
-  },
-  data: () => {
-    return {
-      posts: null,
-
-      postLoading: true
-    };
+    ...mapGetters(["user", "friendButtonText", "posts", "status"])
   },
   mounted() {
     this.$store.dispatch("fetchUser", this.$route.params.userId);
-
-    axios
-      .get("/api/users/" + this.$route.params.userId + "/posts")
-      .then(res => {
-        this.posts = res.data;
-      })
-      .catch(err => {
-        console.log("Unable to facth posts");
-      })
-      .finally(() => {
-        this.postLoading = false;
-      });
+    this.$store.dispatch("fetchUserPosts", this.$route.params.userId);
   }
 };
 </script>
