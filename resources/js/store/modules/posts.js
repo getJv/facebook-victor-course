@@ -1,6 +1,7 @@
 const state = {
     newsPosts: null,
-    newsPostsStatus: null
+    newsPostsStatus: null,
+    postMessage: ""
 };
 const getters = {
     newsPosts: state => {
@@ -8,6 +9,9 @@ const getters = {
     },
     newsPostsStatus: state => {
         return state.newsPostsStatus;
+    },
+    postMessage: state => {
+        return state.postMessage;
     }
 };
 const actions = {
@@ -23,6 +27,18 @@ const actions = {
                 console.log("Unable to facth posts");
                 commit("setPostsStatus", "error");
             });
+    },
+    postMessage({ commit, state }) {
+        commit("setPostsStatus", "loading");
+        axios
+            .post("/api/posts", {
+                body: state.postMessage
+            })
+            .then(res => {
+                commit("pushPost", res.data);
+                commit("updateMessage", "");
+            })
+            .catch(err => {});
     }
 };
 const mutations = {
@@ -31,6 +47,12 @@ const mutations = {
     },
     setPostsStatus(state, status) {
         state.newsPostsStatus = status;
+    },
+    updateMessage(state, message) {
+        state.postMessage = message;
+    },
+    pushPost(state, post) {
+        state.newsPosts.data.unshift(post);
     }
 };
 
