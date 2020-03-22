@@ -1988,8 +1988,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
-var _this = undefined;
-
+//
 //
 //
 //
@@ -2037,7 +2036,7 @@ var _this = undefined;
         return this.$store.getters.postMessage;
       },
       set: lodash__WEBPACK_IMPORTED_MODULE_0___default.a.debounce(function (postMessage) {
-        _this.$store.commit("updateMessage", postMessage);
+        this.$store.commit("updateMessage", postMessage);
       }, 300)
     }
   }
@@ -37962,6 +37961,7 @@ var actions = {
       body: state.postMessage
     }).then(function (res) {
       commit("pushPost", res.data);
+      commit("setPostsStatus", "success");
       commit("updateMessage", "");
     })["catch"](function (err) {});
   }

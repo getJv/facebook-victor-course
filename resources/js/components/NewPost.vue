@@ -16,6 +16,7 @@
           class="w-full pl-4 h-8 bg-gray-200 rounded-full focus:outline-none focus:shadow-outline text-sm"
           placeholder="Add a post"
         />
+
         <transition name="fade">
           <button
             v-if="postMessage"
@@ -45,7 +46,7 @@ export default {
       get() {
         return this.$store.getters.postMessage;
       },
-      set: _.debounce(postMessage => {
+      set: _.debounce(function(postMessage) {
         this.$store.commit("updateMessage", postMessage);
       }, 300)
     }
