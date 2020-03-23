@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center py-4" v-if="newsPostsStatus === 'success'">
     <NewPost />
     <p v-if="newsPostsStatus === 'loading'">Loading posts...</p>
-    <Post v-else v-for="post in newsPosts.data" :key="post.data.post_id" :post="post" />
+    <Post v-else v-for="(post,postKey) in newsPosts.data" :key="postKey" :post="post" />
   </div>
 </template>
 <script>
