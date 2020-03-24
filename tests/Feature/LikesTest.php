@@ -43,7 +43,7 @@ class LikesTest extends TestCase
         ]);
     }
     /** @test */
-    public function posts_are_returned_with_test()
+    public function posts_are_returned_with_likes()
     {
         $this->actingAs($user = factory(User::class)->create(), 'api');
         $post = factory(Post::class)->create(['id' => 123, 'user_id' => $user->id]);
@@ -57,7 +57,6 @@ class LikesTest extends TestCase
                     [
                         'data' => [
                             'type' => 'posts',
-                            /* 'post_id' => 1, */
                             'attributes' => [
                                 'likes' => [
                                     'data' => [
@@ -76,10 +75,8 @@ class LikesTest extends TestCase
                                 ]
                             ]
                         ],
-                        /*  'links' => [], */
                     ]
                 ],
-                /*  'links' => [], */
             ]);
     }
 }
