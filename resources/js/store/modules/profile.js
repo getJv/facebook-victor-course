@@ -1,8 +1,6 @@
 const state = {
     user: null,
-    userStatus: null,
-    posts: null,
-    postsStatus: null
+    userStatus: null
 };
 const getters = {
     user: state => {
@@ -14,9 +12,7 @@ const getters = {
             posts: state.postsStatus
         };
     },
-    posts: state => {
-        return state.posts;
-    },
+
     friendship: state => {
         return state.user.data.attributes.friendship;
     },
@@ -50,19 +46,7 @@ const actions = {
                 commit("setUserStatus", "error");
             });
     },
-    fetchUserPosts({ commit, dispatch }, userId) {
-        commit("setPostsStatus", "loading");
-        axios
-            .get("/api/users/" + userId + "/posts")
-            .then(res => {
-                commit("setPosts", res.data);
-                commit("setPostsStatus", "success");
-            })
-            .catch(err => {
-                console.log("Unable to facth posts");
-                commit("setPostsStatus", "error");
-            });
-    },
+
     sendFriendRequest({ commit, getters }, friendId) {
         if (getters.friendButtonText !== "Add Friend") {
             return;
@@ -101,17 +85,11 @@ const mutations = {
     setUser(state, user) {
         state.user = user;
     },
-    setPosts(state, posts) {
-        state.posts = posts;
-    },
     setUserFriendship(state, friendship) {
         state.user.data.attributes.friendship = friendship;
     },
     setUserStatus(state, status) {
         state.userStatus = status;
-    },
-    setPostsStatus(state, status) {
-        state.postsStatus = status;
     }
 };
 

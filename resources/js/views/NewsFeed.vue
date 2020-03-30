@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      newsPosts: "newsPosts",
+      newsPosts: "posts",
       newsPostsStatus: "newsPostsStatus"
     })
   },

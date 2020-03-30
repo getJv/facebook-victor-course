@@ -65,11 +65,13 @@
           v-model="commentBody"
           type="text"
           name="comment"
+          placeholder="write your comment"
           class="w-full pl-4 h-8 bg-gray-200 rounded-lg"
         />
         <button
           v-if="commentBody"
           class="bg-gray-200 ml-2 px-2 py-1 focus:outline-none rounded-lg"
+          @click="$store.dispatch('commentPost',{ body: commentBody, postId: post.data.post_id, postKey: $vnode.key }); commentBody = ''"
         >Post!</button>
       </div>
       <div
