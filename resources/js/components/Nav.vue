@@ -43,7 +43,7 @@
         class="px-6 border-b-2 border-white h-full flex items-center"
       >
         <img
-          src="https://cdn.pixabay.com/photo/2014/07/09/10/04/man-388104_960_720.jpg"
+          :src="$store.getters.authUser.data.attributes.profile_image.data.attributes.path"
           alt="profile image for user"
           class="w-8 h-8 object-cover rounded-full"
         />

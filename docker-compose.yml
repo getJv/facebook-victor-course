@@ -1,28 +1,24 @@
-version: '3'
+version: "3"
 services:
   mysql:
-    container_name: mysql
+    container_name: mysql-codestape
     image: getjv/mysql
     restart: always
     ports:
       - "3306:3306"
-    environment: 
+    environment:
       - MYSQL_ROOT_PASSWORD=mysql
   backend:
-    container_name: backend
-    image: getjv/php7.2
+    container_name: php-codestape
+    image: getjv/php-apache
     restart: always
     ports:
       - "80:80"
     volumes:
       - .:/var/www/html
     environment:
-      - HTTPD_SERVER_NAME=local
-      - HTTPD_DOCUMENT_ROOT_CONTEXT=public
+      - ALLOW_OVERRIDE_OPTION=All
+      - APPLICATION_ENV_OPTION=development
+      - DOCUMENT_ROOT_CONTEXT=public
     links:
       - mysql
-
-      
-
-     
-     

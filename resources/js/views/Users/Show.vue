@@ -2,18 +2,24 @@
   <div class="flex flex-col items-center" v-if="status.user === 'success' && user">
     <div class="relative mb-8">
       <div class="w-100 h-64 overflow-hidden z-10">
-        <img
-          src="https://images.pexels.com/photos/814499/pexels-photo-814499.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1008"
-          alt="userbg image"
-          class="object-cover w-full"
+        <UploadableImage
+          image-width="1200"
+          image-height="500"
+          location="cover"
+          classes="object-cover w-full"
+          altText="userbg image"
+          :user-image="user.data.attributes.cover_image"
         />
       </div>
       <div class="absolute flex items-center bottom-0 left-0 -mb-8 ml-12 z-20">
         <div class="w-32">
-          <img
-            src="https://cdn.pixabay.com/photo/2014/07/09/10/04/man-388104_960_720.jpg"
-            alt="user profile"
-            class="object-cover w-32 h-32 border-4 border-gray-200 rounded-full shadow-lg"
+          <UploadableImage
+            image-width="750"
+            image-height="750"
+            location="profile"
+            classes="object-cover w-32 h-32 border-4 border-gray-200 rounded-full shadow-lg"
+            altText="user profile"
+            :user-image="user.data.attributes.profile_image"
           />
         </div>
         <p class="text-2xl text-gray-100 ml-4">{{user.data.attributes.name }}</p>
@@ -44,11 +50,13 @@
 </template>
 <script>
 import Post from "../../components/Post";
+import UploadableImage from "../../components/UploadableImage";
 import { mapGetters } from "vuex";
 export default {
   name: "Show",
   components: {
-    Post
+    Post,
+    UploadableImage
   },
 
   computed: {

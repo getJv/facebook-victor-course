@@ -4,7 +4,7 @@
       <div class="flex items-center">
         <div class="w-8">
           <img
-            src="https://cdn.pixabay.com/photo/2014/07/09/10/04/man-388104_960_720.jpg"
+            :src="$store.getters.authUser.data.attributes.profile_image.data.attributes.path"
             alt="profile image for user"
             class="w-8 h-8 object-cover rounded-full"
           />
@@ -18,7 +18,7 @@
         <p>{{post.data.attributes.body}}</p>
       </div>
     </div>
-    <div class="w-full" v-if="post.data.attributes.image">
+    <div class="w-full" v-if="post.data.attributes.image.length">
       <img :src="post.data.attributes.image" alt="Post image" class="w-full" />
     </div>
     <div class="px-4 pt-4 flex justify-between text-gray-700 text-sm">
@@ -82,7 +82,7 @@
         <div class="w-8">
           <a :href="'/users/' + comment.data.attributes.commented_by.data.user_id">
             <img
-              src="https://cdn.pixabay.com/photo/2014/07/09/10/04/man-388104_960_720.jpg"
+              :src="$store.getters.authUser.data.attributes.profile_image.data.attributes.path"
               alt="profile image for user"
               class="w-8 h-8 object-cover rounded-full"
             />
