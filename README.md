@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="Laravel-Fullstack-Course" title="Simuladores" src=".github/logo.svg" />
+    <img alt="Laravel-Fullstack-Course" title="Laravel-Fullstack-Course" src=".github/logo.svg" />
 </h1>
 
 <p align="center">
@@ -15,7 +15,7 @@
 </p>
 
 <p align="center" >
-  <img id="gif" alt="gif preview" src="github/preview.svg" />
+  <img id="gif" alt="gif preview" src=".github/preview.svg" />
 </p>
 
 ## 🔖 Project
